@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Cyizere gorilla with headset">
+<rect x="2" y="2" width="60" height="60" rx="21" fill="#245d52"/>
+<path d="M14 24c0-10 8-17 18-17s18 7 18 17v14c0 11-8 18-18 18S14 49 14 38V24Z" fill="#4a3028" stroke="#d4eadd" stroke-width="2"/>
+<path d="M12 27c0-13 8-21 20-21s20 8 20 21" fill="none" stroke="#f0a38b" stroke-width="5" stroke-linecap="round"/>
+<path d="M11 25v14c0 4 3 7 7 7h3V25h-4c-3 0-5 0-6 0Zm42 0v14c0 4-3 7-7 7h-3V25h4c3 0 5 0 6 0Z" fill="#1e8878" stroke="#f6f4ed" stroke-width="2"/>
+<path d="M20 31c2-4 5-6 9-6m6 0c4 0 7 2 9 6" fill="none" stroke="#2b211f" stroke-width="3" stroke-linecap="round"/>
+<ellipse cx="24" cy="33" rx="3" ry="2.6" fill="#f6f4ed"/><ellipse cx="40" cy="33" rx="3" ry="2.6" fill="#f6f4ed"/><circle cx="24" cy="33" r="1.3" fill="#123b36"/><circle cx="40" cy="33" r="1.3" fill="#123b36"/>
+<path d="M25 43c4 4 10 4 14 0" fill="none" stroke="#f0a38b" stroke-width="2.6" stroke-linecap="round"/><path d="M48 44c2 0 4 2 4 4v2" fill="none" stroke="#f0a38b" stroke-width="2.5" stroke-linecap="round"/><circle cx="52" cy="52" r="2.5" fill="#f0a38b"/>
+</svg>

@@ -1,0 +1,38 @@
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Python and frontend checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+      - name: Check Python syntax
+        run: python -m py_compile app.py content_seed.py init_db.py manage_admin.py wsgi.py
+      - name: Run automated tests
+        run: python -m unittest discover -s tests -v
+      - name: Check browser JavaScript syntax
+        run: node --check static/app.js

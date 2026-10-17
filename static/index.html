@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123b36">
+  <meta name="description" content="Accessible health, rights and digital safety learning for young people and communities in Rwanda.">
+  <title>Safe Informational Spaces</title>
+  <link rel="icon" href="/static/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/app.css">
+  <link rel="stylesheet" href="/static/brand.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="utility-bar"><span id="utility-text">Your Health. Your Rights. Your Safe Space.</span><a href="/help" data-page="help" class="utility-link" id="urgent-link">Get help / Report violence</a></div>
+  <header class="site-header">
+    <a class="brand" href="/" data-page="home" aria-label="Safe Informational Spaces home">
+      <img src="/static/logo.svg" width="44" height="44" alt="">
+      <span><strong>Safe Informational</strong><small>SPACES</small></span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="main-nav"><span class="sr-only">Open navigation</span><span aria-hidden="true">☰</span></button>
+    <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+      <a href="/" data-page="home">Home</a>
+      <a href="/about" data-page="about">About</a>
+      <a href="/team" data-page="team">Our team</a>
+      <a href="/services" data-page="services">Services</a>
+      <a href="/learning" data-page="learning">Learn</a>
+      <a href="/resources" data-page="resources">Resources</a>
+      <a href="/donate" data-page="donate">Donate</a>
+      <a href="/contact" data-page="contact">Contact</a>
+      <a href="/search" data-page="search">Search</a>
+    </nav>
+    <div class="header-actions">
+      <label class="sr-only" for="language">Language</label>
+      <select id="language" class="language-select" aria-label="Choose language"><option value="en">EN</option><option value="rw">RW</option><option value="fr">FR</option></select>
+      <button class="icon-button" id="theme-toggle" aria-label="Toggle dark appearance" title="Toggle appearance">◐</button>
+      <a href="/admin" data-page="admin" class="login-link" id="admin-link">Admin</a>
+    </div>
+  </header>
+  <div class="review-strip" role="note"><span class="review-dot" aria-hidden="true"></span><span id="review-notice">AI-generated draft · pending authorized review</span><a href="/about" data-page="about" id="review-learn-more">About our review process</a></div>
+
+  <main id="main" tabindex="-1"></main>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand"><img src="/static/logo.svg" width="40" height="40" alt=""><div><strong>Safe Informational Spaces</strong><p id="footer-tagline">Your Health. Your Rights. Your Safe Space.</p></div></div>
+      <p id="footer-location">Huye District · University of Rwanda · Rwanda</p>
+      <div class="footer-links"><a href="/help" data-page="help">Get help</a><a href="/privacy" data-page="privacy">Privacy</a><a href="/resources" data-page="resources">Sources</a><a href="/admin" data-page="admin">Administrator sign-in</a></div>
+    </div>
+    <div class="footer-bottom"><span>© Safe Informational Spaces</span><span id="footer-draft">Learning copy is awaiting authorized review.</span></div>
+  </footer>
+
+  <button class="cyizere-launch" id="cyizere-launch" aria-haspopup="dialog" aria-controls="assistant-panel"><img class="gorilla-mark" src="/static/cyizere.svg" alt=""><span><strong>Cyizere</strong><small>Learning assistant</small></span><span class="launch-spark" aria-hidden="true">✦</span></button>
+  <section id="assistant-panel" class="assistant-panel" role="dialog" aria-modal="false" aria-labelledby="assistant-title" hidden>
+    <div class="assistant-head"><div class="assistant-avatar" aria-hidden="true">C</div><div><p class="eyebrow" id="assistant-mode-label">AI EDUCATIONAL ASSISTANT</p><h2 id="assistant-title">Hello, I’m Cyizere</h2></div><button id="assistant-close" class="icon-button" aria-label="Close Cyizere">×</button></div>
+    <p class="assistant-intro" id="assistant-intro">I can help explore learning topics. I am an AI, not a clinician or emergency service.</p>
+    <div class="mode-tabs" role="tablist" aria-label="Support options"><button role="tab" aria-selected="true" data-mode="ai">AI chat</button><button role="tab" aria-selected="false" data-mode="human">Human text</button><button role="tab" aria-selected="false" data-mode="voice">Voice support</button></div>
+    <div id="assistant-content" class="assistant-content"><div id="chat-messages" class="chat-messages" aria-live="polite"></div><form id="chat-form"><label class="sr-only" for="chat-input">Ask Cyizere a question</label><textarea id="chat-input" rows="2" maxlength="4000" placeholder="Ask an educational question"></textarea><button class="button button-primary" type="submit">Send</button></form><p class="microcopy" id="chat-privacy">Messages are not stored by this local application. Do not enter names or identifying details.</p></div>
+  </section>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+.env
+.git
+__pycache__
+*.py[cod]
+data
+*.sqlite3*
+tests/__pycache__
+.github
+docs
+tests
+README.md
+compose.yaml
+render.yaml

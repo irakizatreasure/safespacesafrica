@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: safe-informational-spaces
+    runtime: docker
+    branch: main
+    plan: starter
+    region: frankfurt
+    autoDeployTrigger: checksPass
+    healthCheckPath: /api/health
+    disk:
+      name: sisp-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: SISP_ENV
+        value: production
+      - key: SISP_DB_PATH
+        value: /var/data/sisp.sqlite3
+      - key: SISP_COOKIE_SECURE
+        value: "true"
+      - key: SISP_ADMIN_EMAIL
+        sync: false
+      - key: SISP_ADMIN_PASSWORD
+        sync: false
