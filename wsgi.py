@@ -22,6 +22,8 @@ def validate_production_environment() -> None:
         )
     if os.environ.get("SISP_COOKIE_SECURE", "").lower() != "true":
         raise RuntimeError("Production startup requires SISP_COOKIE_SECURE=true behind HTTPS.")
+    if not (os.environ.get("SISP_DATABASE_URL", "").strip() or os.environ.get("DATABASE_URL", "").strip()):
+        raise RuntimeError("Production startup requires a persistent Postgres DATABASE_URL. Do not use ephemeral local storage for production data.")
 
     provider = os.environ.get("SISP_AI_PROVIDER", "").lower()
     if provider and provider not in {"openai", "gemini"}:

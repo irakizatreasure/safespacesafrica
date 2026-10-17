@@ -1,23 +1,21 @@
 services:
   - type: web
-    name: safe-informational-spaces
-    runtime: docker
+    name: safespacesafrica
+    runtime: python
     branch: main
-    plan: starter
+    plan: free
     region: frankfurt
     autoDeployTrigger: checksPass
+    buildCommand: pip install -r requirements.txt
+    startCommand: "gunicorn wsgi:application --bind 0.0.0.0:${PORT:-10000} --workers 1"
     healthCheckPath: /api/health
-    disk:
-      name: sisp-data
-      mountPath: /var/data
-      sizeGB: 1
     envVars:
       - key: SISP_ENV
         value: production
-      - key: SISP_DB_PATH
-        value: /var/data/sisp.sqlite3
       - key: SISP_COOKIE_SECURE
         value: "true"
+      - key: DATABASE_URL
+        sync: false
       - key: SISP_ADMIN_EMAIL
         sync: false
       - key: SISP_ADMIN_PASSWORD

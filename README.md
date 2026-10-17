@@ -2,7 +2,7 @@
 
 A responsive, multilingual web application for the Safe Informational Spaces project. It includes a public website, learning-path catalogue, review-gated lesson and quiz content, accessible browser read-aloud, private on-device learning progress, sourced Rwanda help contacts, and a role-protected administrator workspace.
 
-**Current handover status:** The source is published at [irakizatreasure/safespacesafrica](https://github.com/irakizatreasure/safespacesafrica), and the GitHub Actions checks pass. It has not yet been deployed to a hosting provider. The MVP still needs reviewed public content and real support operations before it can be offered as a complete youth service. See [Feature status and handover](docs/HANDOVER.md).
+**Current handover status:** The source is published at [irakizatreasure/safespacesafrica](https://github.com/irakizatreasure/safespacesafrica). The free hosting configuration uses Render for the Python app and Supabase Postgres for persistent data. It still needs the hosting accounts and production secrets configured before a live deployment can start. The MVP also needs reviewed public content and real support operations before it can be offered as a complete youth service. See [Feature status and handover](docs/HANDOVER.md).
 
 ## Run locally
 
@@ -46,7 +46,7 @@ The Compose file binds only to localhost. The container uses Gunicorn; public de
 
 The source is published in [irakizatreasure/safespacesafrica](https://github.com/irakizatreasure/safespacesafrica). GitHub Actions runs Python tests and syntax checks on pushes and pull requests to `main`. Do not commit `.env`, database files, or production secrets.
 
-This is a full-stack Python application. GitHub Pages can serve static files but cannot run this app's Python API, database, admin dashboard, or AI endpoint. For a working deployment, connect the GitHub repository to a compatible application host. The included `render.yaml` is a Render Blueprint for the app, its health check, secure-cookie mode, a persistent database disk, and deploys from `main` after GitHub checks pass. It selects Frankfurt and a paid Starter service because persistent disks are required to retain admin and content data. Review current hosting charges before creating resources. Follow [Deployment and environment configuration](docs/DEPLOYMENT.md).
+This is a full-stack Python application. GitHub Pages can serve static files but cannot run this app's Python API, database, admin dashboard, or AI endpoint. The included `render.yaml` is a Render Blueprint for the free Python web service; it deploys from `main` after GitHub checks pass. Set `DATABASE_URL` to the Supabase Postgres **session pooler** connection string in Render, then set a real `SISP_ADMIN_EMAIL` and a unique `SISP_ADMIN_PASSWORD` of at least 14 characters. Those values belong in the host's secret manager, never in GitHub. Local development continues to use SQLite; production refuses to start without Postgres so content and admin changes are not written to an ephemeral web container. This free setup is for an early pilot, not a high-availability service: the web service can sleep and the free database can pause after inactivity. Follow [Deployment and environment configuration](docs/DEPLOYMENT.md).
 
 ## Languages and content
 
@@ -67,8 +67,8 @@ Page copy, lesson, FAQ, guide and source-candidate text can be edited in the dat
 
 ## Architecture
 
-- Python WSGI application using standard library modules for application code; Docker production serving uses pinned Gunicorn.
-- SQLite database with idempotent startup seeding and server-side API authorization.
+- Python WSGI application using standard library modules for application code; Gunicorn serves the production app.
+- SQLite for local development and Postgres for hosted production, with idempotent startup seeding and server-side API authorization.
 - Static HTML, CSS and JavaScript frontend with responsive navigation and accessible controls.
 - No third-party frontend bundles and no external font dependency.
 - Optional server-side AI adapter for OpenAI-compatible Chat Completions or Google Gemini. It uses only approved, published platform lessons, does not store conversations, and will report unavailable when provider configuration or reviewed knowledge is missing.
