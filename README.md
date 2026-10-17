@@ -2,7 +2,7 @@
 
 A responsive, multilingual web application for the Safe Informational Spaces project. It includes a public website, learning-path catalogue, review-gated lesson and quiz content, accessible browser read-aloud, private on-device learning progress, sourced Rwanda help contacts, and a role-protected administrator workspace.
 
-**Current handover status:** GitHub-ready source with automated checks and a production WSGI container/hosting blueprint. It has not been pushed to GitHub or deployed. The MVP still needs reviewed public content and real support operations before it can be offered as a complete youth service. See [Feature status and handover](docs/HANDOVER.md).
+**Current handover status:** The source is published at [irakizatreasure/safespacesafrica](https://github.com/irakizatreasure/safespacesafrica), and the GitHub Actions checks pass. It has not yet been deployed to a hosting provider. The MVP still needs reviewed public content and real support operations before it can be offered as a complete youth service. See [Feature status and handover](docs/HANDOVER.md).
 
 ## Run locally
 
@@ -44,19 +44,9 @@ The Compose file binds only to localhost. The container uses Gunicorn; public de
 
 ## GitHub and hosting
 
-The project is ready to place in a GitHub repository. GitHub Actions runs Python tests and syntax checks on pushes and pull requests to `main`. Create an empty repository on GitHub, then from this project directory run:
+The source is published in [irakizatreasure/safespacesafrica](https://github.com/irakizatreasure/safespacesafrica). GitHub Actions runs Python tests and syntax checks on pushes and pull requests to `main`. Do not commit `.env`, database files, or production secrets.
 
-```bash
-git init -b main
-git add .
-git commit -m "Prepare Safe Informational Spaces"
-git remote add origin https://github.com/OWNER/REPOSITORY.git
-git push -u origin main
-```
-
-Replace `OWNER/REPOSITORY` with the repository path. Do not commit `.env`, database files, or production secrets.
-
-This is a full-stack Python application. GitHub Pages can serve static files but cannot run this app's Python API, database, admin dashboard, or AI endpoint. For a working deployment, connect the GitHub repository to a compatible application host. The included `render.yaml` is a Render Blueprint for the app, its health check, secure-cookie mode, a persistent database disk, and deploys from `main` after GitHub checks pass. It selects Frankfurt for the Rwanda audience and a paid Starter service because persistent disks are required to retain admin and content data. Review current hosting charges before creating resources. Follow [Deployment and environment configuration](docs/DEPLOYMENT.md).
+This is a full-stack Python application. GitHub Pages can serve static files but cannot run this app's Python API, database, admin dashboard, or AI endpoint. For a working deployment, connect the GitHub repository to a compatible application host. The included `render.yaml` is a Render Blueprint for the app, its health check, secure-cookie mode, a persistent database disk, and deploys from `main` after GitHub checks pass. It selects Frankfurt and a paid Starter service because persistent disks are required to retain admin and content data. Review current hosting charges before creating resources. Follow [Deployment and environment configuration](docs/DEPLOYMENT.md).
 
 ## Languages and content
 

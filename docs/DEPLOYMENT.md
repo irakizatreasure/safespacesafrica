@@ -2,15 +2,7 @@
 
 ## GitHub repository
 
-Create an empty GitHub repository, then run the following in the project directory (replace the URL with the repository you created):
-
-```bash
-git init -b main
-git add .
-git commit -m "Prepare Safe Informational Spaces"
-git remote add origin https://github.com/OWNER/REPOSITORY.git
-git push -u origin main
-```
+The source is published in [irakizatreasure/safespacesafrica](https://github.com/irakizatreasure/safespacesafrica) on `main`. Do not commit `.env`, database files, or production secrets.
 
 The workflow in `.github/workflows/ci.yml` runs Python syntax checks, the test suite, and a browser JavaScript syntax check on pushes and pull requests to `main`.
 
@@ -20,13 +12,12 @@ GitHub Pages is a static-file host and cannot run the Python WSGI API or SQLite-
 
 The included `render.yaml` describes a Docker web service with Gunicorn, `/api/health` readiness checks, HTTPS-only session cookies, and a 1 GB persistent disk for the SQLite database. It selects Frankfurt for the Rwanda audience and Render's paid `starter` plan because persistent disks are not available on free web services. After initial setup, it deploys commits from `main` only when GitHub checks pass. Review the current plan and disk charges before creating the Blueprint.
 
-1. Push the project to GitHub using the instructions above.
-2. In Render, create a new Blueprint and connect the GitHub repository.
-3. When prompted, supply a real administrator email and a unique password of at least 14 characters. Render stores these as service environment secrets; do not put them in GitHub.
-4. Review the plan, persistent disk, and region, then create the service.
-5. Wait for the deploy to pass its `/api/health` check. Visit the generated service URL and sign in at `/admin`.
-6. In the Render dashboard, verify `SISP_COOKIE_SECURE=true`, `SISP_ENV=production`, `SISP_DB_PATH=/var/data/sisp.sqlite3`, and confirm the disk is attached before entering any editorial work.
-7. Set up database backups and a restore drill before public use. Render's disk preserves database files across deploys, but it is not a backup.
+1. In Render, create a new Blueprint and connect `irakizatreasure/safespacesafrica`.
+2. When prompted, supply a real administrator email and a unique password of at least 14 characters. Render stores these as service environment secrets; do not put them in GitHub or chat.
+3. Review the plan, persistent disk, and region, then create the service.
+4. Wait for the deploy to pass its `/api/health` check. Visit the generated service URL and sign in at `/admin`.
+5. In the Render dashboard, verify `SISP_COOKIE_SECURE=true`, `SISP_ENV=production`, `SISP_DB_PATH=/var/data/sisp.sqlite3`, and confirm the disk is attached before entering any editorial work.
+6. Set up database backups and a restore drill before public use. Render's disk preserves database files across deploys, but it is not a backup.
 
 No hosting account is connected by this workspace, so the Blueprint has not been applied and there is no live URL yet. Public launch still requires reviewed content, privacy/safeguarding review, real support arrangements, referral verification, and operational monitoring. See [HANDOVER.md](HANDOVER.md) for the full launch blockers.
 
