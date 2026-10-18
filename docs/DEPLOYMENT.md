@@ -1,4 +1,4 @@
-# GitHub and production deployment
+# Umucyo Spaces Hub: GitHub and production deployment
 
 ## GitHub repository
 
@@ -8,20 +8,16 @@ The workflow in `.github/workflows/ci.yml` runs Python syntax checks, the test s
 
 GitHub Pages is a static-file host and cannot run the Python WSGI API or SQLite-backed administration. Do not point Pages at this source tree as if it were a complete deployment. Use a Python-capable application host for the full site.
 
-## Free Render + Supabase pilot
+## Current Render + Supabase pilot
 
-The included `render.yaml` deploys the Python WSGI app on Render's free web service. Since free Render filesystems are ephemeral, hosted content and admin accounts live in Supabase Postgres. Local development continues to use SQLite. In production, startup requires `DATABASE_URL` so the app cannot silently store editable content on a container that may be restarted.
+The live pilot at [safespacesafrica.onrender.com](https://safespacesafrica.onrender.com/) runs the Python WSGI app on Render and stores hosted content and admin accounts in Supabase Postgres. Render filesystems are ephemeral, so production startup requires `DATABASE_URL`. Local development continues to use SQLite.
 
-1. Create a Supabase project on the Free plan. Choose a region near the people who will use the site.
-2. In the Supabase dashboard, open **Connect** and copy the **Session pooler** connection string (port 5432). Render currently requires IPv4, and Supabase documents session pooling as the IPv4-compatible option for a persistent backend. Replace the password placeholder and URL-encode special characters in the password.
-3. In Render, create a Blueprint and connect `irakizatreasure/safespacesafrica`. Use the `render.yaml` in the repository.
-4. Set the requested `DATABASE_URL`, real `SISP_ADMIN_EMAIL`, and unique `SISP_ADMIN_PASSWORD` of at least 14 characters as Render secrets. Do not place them in the repository, issue comments, or chat.
-5. Create the service and wait for `/api/health` to report ready. Visit the Render URL and sign in at `/admin`.
-6. Export a database backup before major editorial work. Supabase Free has no automatic backups and can pause after a week with low activity; Render Free services sleep after 15 minutes without traffic.
+1. The GitHub `main` branch is connected to the Render service through `render.yaml`; commits deploy after the repository checks pass.
+2. Production `DATABASE_URL`, `SISP_ADMIN_EMAIL`, and `SISP_ADMIN_PASSWORD` are configured in Render's environment settings. Keep these values in the host secret manager, never in GitHub or chat.
+3. The service stores persistent data in Supabase Postgres. Use the Supabase dashboard to manage the project and arrange exports/backups before major editorial work.
+4. The live site is [safespacesafrica.onrender.com](https://safespacesafrica.onrender.com/); the administrator sign-in is at `/admin`. Render Free services can sleep after inactivity, and Supabase Free may pause after a period of low activity.
 
-The service will seed starter data when it first connects. Content is draft-only by default and must be reviewed and explicitly published by authorized people. No hosting account is connected to this workspace, so the Blueprint has not been applied and there is no live URL yet. Public launch still requires reviewed content, privacy/safeguarding review, real support arrangements, referral verification, and operational monitoring. See [HANDOVER.md](HANDOVER.md) for the full launch blockers.
-
-## Development preview
+The site seeds learning drafts when the database is initialized. They remain unpublished until authorized review and publication. This is an early pilot: learning content still needs professional review, and human support, reporting, donation handling, privacy/safeguarding review, referral re-verification and operational monitoring remain necessary before wider public use. See [HANDOVER.md](HANDOVER.md) for the current status.## Development preview
 
 1. Create a protected environment file: `cp .env.example .env`.
 2. Set `SISP_ADMIN_EMAIL` and a unique `SISP_ADMIN_PASSWORD` of at least 14 characters before first startup.
@@ -35,7 +31,7 @@ This free setup is suitable for an early, low-traffic pilot. It does not provide
 
 Set `SISP_COOKIE_SECURE=true` only when HTTPS is correctly configured. Bind the app to a private interface behind the reverse proxy. Do not expose the development server directly to the Internet.
 
-The production WSGI entry point validates the first administrator email/password, HTTPS cookie setting, and any configured AI provider before it starts. It does not print secret values in startup errors.
+The production WSGI entry point validates the administrator email/password, HTTPS cookie setting, and any configured AI provider before it starts. It does not print secret values in startup errors.
 
 ## Optional AI provider setup
 
