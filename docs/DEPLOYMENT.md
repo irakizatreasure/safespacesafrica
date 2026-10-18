@@ -10,14 +10,14 @@ GitHub Pages is a static-file host and cannot run the Python WSGI API or SQLite-
 
 ## Current Render + Supabase pilot
 
-The live pilot at [safespacesafrica.onrender.com](https://safespacesafrica.onrender.com/) runs the Python WSGI app on Render and stores hosted content and admin accounts in Supabase Postgres. Render filesystems are ephemeral, so production startup requires `DATABASE_URL`. Local development continues to use SQLite.
+The live pilot at [umucyospacehub.onrender.com](https://umucyospacehub.onrender.com/) runs the Python WSGI app on Render and stores hosted content and admin accounts in Supabase Postgres. Render filesystems are ephemeral, so production startup requires `DATABASE_URL`. Local development continues to use SQLite.
 
 1. The GitHub `main` branch is connected to the Render service through `render.yaml`; commits deploy after the repository checks pass.
 2. Production `DATABASE_URL`, `SISP_ADMIN_EMAIL`, and `SISP_ADMIN_PASSWORD` are configured in Render's environment settings. Keep these values in the host secret manager, never in GitHub or chat.
 3. The service stores persistent data in Supabase Postgres. Use the Supabase dashboard to manage the project and arrange exports/backups before major editorial work.
-4. The live site is [safespacesafrica.onrender.com](https://safespacesafrica.onrender.com/); the administrator sign-in is at `/admin`. Render Free services can sleep after inactivity, and Supabase Free may pause after a period of low activity.
+4. The live site is [umucyospacehub.onrender.com](https://umucyospacehub.onrender.com/); the administrator sign-in is at `/admin`. Render Free services can sleep after inactivity, and Supabase Free may pause after a period of low activity.
 
-The site seeds learning drafts when the database is initialized. They remain unpublished until authorized review and publication. This is an early pilot: learning content still needs professional review, and human support, reporting, donation handling, privacy/safeguarding review, referral re-verification and operational monitoring remain necessary before wider public use. See [HANDOVER.md](HANDOVER.md) for the current status.
+The site seeds learning drafts when the database is initialized. They remain unpublished until authorized review and publication. This is an early pilot: learning content still needs professional review, and human-support staffing, privacy/safeguarding review, referral re-verification and operational monitoring remain necessary before wider public use. Changes in the current working tree are not live until merged to the connected branch and a successful Render deploy is confirmed. See [HANDOVER.md](HANDOVER.md) for the current status.
 
 ## Development preview
 
@@ -54,7 +54,15 @@ The model IDs above are examples. Confirm that each selected model is enabled in
 
 OpenAI requests use the official Chat Completions API with server-side Bearer authentication and response storage disabled. Gemini requests use the official `generateContent` API with the API key in a server-side header. The key is never returned to the browser. User messages and the recent conversation are sent to whichever provider is called; the site does not save chat transcripts. Review each provider's current privacy, retention and billing settings before enabling the service.
 
-Cyizere retrieves only language-matched `published` and `approved` lessons, FAQs, guides and page copy. Unreviewed drafts and candidate sources are excluded. The assistant will say when no reviewed site material answers the question. It is an educational tool, not clinical advice, legal advice, counselling, staffed support or emergency response. The app provides a simple availability status without revealing provider or key details. The automated checks do not make live provider calls.
+Cyizere can answer general questions using the configured provider and retrieves language-matched `published` and `approved` lessons, FAQs, guides and page copy when relevant. Unreviewed drafts and candidate sources are excluded from site context. Answers may be detailed but remain AI-generated; Cyizere is not clinical advice, legal advice, counselling, staffed support or emergency response. The configured provider receives the user message and recent conversation. The automated checks do not make live provider calls.
+
+## Human text support
+
+The application includes an assistant-first encrypted text-chat queue. Each new chat is accepted by an approved support assistant before another staff role can receive it. Staff can reply, transfer the chat to another approved staff account with an encryption key, and receive browser notifications after explicitly enabling them. Client and staff presence/typing updates and chat messages are polled every four seconds. Images, audio, video and voice notes are limited to 3 MB each.
+
+Clients are asked for a full name and exact age. Their name, age, opening request, later messages and attachments are encrypted in the browser; the service stores ciphertext and metadata such as timestamps, language, assignment and presence. Staff can read conversations on devices with the proper key. Closing the client panel clears visible messages and pauses the thread but leaves encrypted server history to support resuming or re-queuing. The browser's encryption keys are not recoverable if local browser data is cleared. A transferred staff member who has already read messages may remember or retain them. This implementation has not had an independent security audit, and its operational staffing, safeguarding, legal/privacy review, retention/deletion policy, backup/restore and accessibility procedures must be completed before wider public use. Do not describe it as audited, absolutely confidential or emergency support.
+
+Before enabling staff use, approve support staff through the CEO workspace, have each support staff member sign in and initialize their encryption key in the browser they will use, and arrange coverage and escalation procedures. If no assistant is online, requests wait in the queue and the website must not imply that a response time is guaranteed.
 
 ## Database backup
 
