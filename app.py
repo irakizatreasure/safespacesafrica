@@ -257,6 +257,9 @@ def init_db(db_path: str | Path, *, bootstrap_admin: bool = True) -> None:
                 existing = conn.execute("SELECT id FROM admins WHERE email=?", (email,)).fetchone()
                 if not existing:
                     conn.execute("INSERT INTO admins(email,password_hash,role,created_at) VALUES(?,?,?,?)", (email, hash_password(password), "CEO", now))
+                elif os.environ.get("SISP_ADMIN_PASSWORD_RESET", "").strip().lower() in {"1", "true", "yes"}:
+                    conn.execute("UPDATE admins SET password_hash=?, active=1 WHERE id=?", (hash_password(password), existing["id"]))
+                    conn.execute("DELETE FROM sessions WHERE admin_id=?", (existing["id"],))
 
 
 def safe_json(raw: bytes, maximum: int = 200_000) -> dict:
