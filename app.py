@@ -288,9 +288,9 @@ def handle_ussd(session_id: str, text_input: str, language: str = "en") -> dict:
     """Stateless, non-sensitive USSD menu adapter; no narratives or identifiers are accepted."""
     lang = language if language in LANGUAGES else "en"
     menus = {
-        "en": ["Safe Informational Spaces", "1. Learn", "2. Get help information", "0. Exit"],
-        "rw": ["Safe Informational Spaces", "1. Kwiga", "2. Amakuru y'ubufasha", "0. Sohoka"],
-        "fr": ["Safe Informational Spaces", "1. Apprendre", "2. Informations d’aide", "0. Quitter"],
+        "en": ["Umucyo Spaces Hub", "1. Learn", "2. Get help information", "0. Exit"],
+        "rw": ["Umucyo Spaces Hub", "1. Kwiga", "2. Amakuru y'ubufasha", "0. Sohoka"],
+        "fr": ["Umucyo Spaces Hub", "1. Apprendre", "2. Informations d’aide", "0. Quitter"],
     }
     if not re.fullmatch(r"[A-Za-z0-9_-]{1,80}", session_id or ""):
         return {"status":"END", "message":"Invalid session"}
@@ -719,7 +719,7 @@ def main():
     host = os.environ.get("SISP_HOST", "127.0.0.1")
     port = int(os.environ.get("SISP_PORT", "8000"))
     with make_server(host, port, app) as server:
-        print(f"Safe Informational Spaces listening on http://{host}:{port}")
+        print(f"Umucyo Spaces Hub listening on http://{host}:{port}")
         server.serve_forever()
 
 
