@@ -123,6 +123,9 @@ class HybridRow(dict):
 
 
 def _hybrid_row_factory(cursor):
+    # DDL and other commands may not return rows, so psycopg has no description.
+    if cursor.description is None:
+        return tuple
     names = [column.name for column in cursor.description]
     return lambda values: HybridRow(names, values)
 
