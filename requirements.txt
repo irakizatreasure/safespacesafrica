@@ -1,2 +1,2 @@
-gunicorn==26.2.0
+gunicorn==26.2.2
 psycopg[binary]>=3.2,<4

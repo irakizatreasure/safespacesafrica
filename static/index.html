@@ -29,16 +29,26 @@
       <a href="/resources" data-page="resources">Resources</a>
       <a href="/donate" data-page="donate">Donate</a>
       <a href="/contact" data-page="contact">Contact</a>
+      <a href="/account" data-page="account">My account</a>
       <a href="/search" data-page="search">Search</a>
     </nav>
     <div class="header-actions">
       <label class="sr-only" for="language">Language</label>
       <select id="language" class="language-select" aria-label="Choose language"><option value="en">EN</option><option value="rw">RW</option><option value="fr">FR</option></select>
       <button class="icon-button" id="theme-toggle" aria-label="Toggle dark appearance" title="Toggle appearance">◐</button>
-      <a href="/admin" data-page="admin" class="login-link" id="admin-link">Admin</a>
+      <a href="/admin" data-page="admin" class="login-link" id="admin-link">Staff sign-in</a>
     </div>
   </header>
   <div class="review-strip" role="note"><span class="review-dot" aria-hidden="true"></span><span id="review-notice">AI-generated draft · pending authorized review</span><a href="/about" data-page="about" id="review-learn-more">About our review process</a></div>
+
+  <div class="accessibility-tools" role="group" aria-label="Accessibility tools">
+    <span>Accessibility</span>
+    <button type="button" id="contrast-toggle" aria-pressed="false">High contrast</button>
+    <button type="button" id="text-size-toggle" aria-label="Increase text size">Text size +</button>
+    <button type="button" id="read-page">Read page aloud</button>
+    <button type="button" id="stop-reading" hidden>Stop reading</button>
+    <span id="accessibility-status" class="sr-only" role="status" aria-live="polite"></span>
+  </div>
 
   <main id="main" tabindex="-1"></main>
 
@@ -46,7 +56,13 @@
     <div class="footer-main">
       <div class="footer-brand"><img src="/static/logo.svg" width="40" height="40" alt=""><div><strong>Umucyo Spaces Hub</strong><p id="footer-tagline">Your Health. Your Rights. Your Safe Space.</p></div></div>
       <p id="footer-location">Huye District · University of Rwanda · Rwanda</p>
-      <div class="footer-links"><a href="/help" data-page="help">Get help</a><a href="/privacy" data-page="privacy">Privacy</a><a href="/resources" data-page="resources">Sources</a><a href="/admin" data-page="admin">Administrator sign-in</a></div>
+      <div class="footer-links"><a href="/help" data-page="help">Get help</a><a href="/privacy" data-page="privacy">Privacy</a><a href="/resources" data-page="resources">Sources</a><a href="/staff" data-page="staff">Staff applications</a><a href="/admin" data-page="admin">Staff sign-in</a></div>
+      <section class="footer-map" aria-labelledby="footer-map-title">
+        <h2 id="footer-map-title">National University of Rwanda · Huye Campus</h2>
+        <p>Campus location reference. This is not an Umucyo Spaces Hub office address.</p>
+        <iframe title="OpenStreetMap location of the University of Rwanda Huye Campus, formerly National University of Rwanda" src="https://www.openstreetmap.org/export/embed.html?bbox=29.733%2C-2.624%2C29.753%2C-2.606&amp;layer=mapnik&amp;marker=-2.61555%2C29.74296" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe>
+        <a href="https://www.openstreetmap.org/?mlat=-2.61555&amp;mlon=29.74296#map=16/-2.61555/29.74296" target="_blank" rel="noopener noreferrer">Open campus map</a>
+      </section>
     </div>
     <div class="footer-bottom"><span>© Umucyo Spaces Hub</span><span id="footer-draft">Learning copy is awaiting authorized review.</span></div>
   </footer>

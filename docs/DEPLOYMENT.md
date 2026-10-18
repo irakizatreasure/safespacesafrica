@@ -17,7 +17,9 @@ The live pilot at [safespacesafrica.onrender.com](https://safespacesafrica.onren
 3. The service stores persistent data in Supabase Postgres. Use the Supabase dashboard to manage the project and arrange exports/backups before major editorial work.
 4. The live site is [safespacesafrica.onrender.com](https://safespacesafrica.onrender.com/); the administrator sign-in is at `/admin`. Render Free services can sleep after inactivity, and Supabase Free may pause after a period of low activity.
 
-The site seeds learning drafts when the database is initialized. They remain unpublished until authorized review and publication. This is an early pilot: learning content still needs professional review, and human support, reporting, donation handling, privacy/safeguarding review, referral re-verification and operational monitoring remain necessary before wider public use. See [HANDOVER.md](HANDOVER.md) for the current status.## Development preview
+The site seeds learning drafts when the database is initialized. They remain unpublished until authorized review and publication. This is an early pilot: learning content still needs professional review, and human support, reporting, donation handling, privacy/safeguarding review, referral re-verification and operational monitoring remain necessary before wider public use. See [HANDOVER.md](HANDOVER.md) for the current status.
+
+## Development preview
 
 1. Create a protected environment file: `cp .env.example .env`.
 2. Set `SISP_ADMIN_EMAIL` and a unique `SISP_ADMIN_PASSWORD` of at least 14 characters before first startup.
@@ -35,9 +37,9 @@ The production WSGI entry point validates the administrator email/password, HTTP
 
 ## Optional AI provider setup
 
-Set all of `SISP_AI_PROVIDER`, `SISP_AI_API_KEY`, and `SISP_AI_MODEL` in the hosting secret manager. The provider can be `openai` or `gemini`. Use a model approved by the organization and review current provider terms/privacy settings before sending user questions. For OpenAI, the application sends a server-side Bearer token to the configured Chat Completions endpoint; for Gemini it sends `x-goog-api-key` in the request header. No key is returned to the browser.
+Set all of `SISP_AI_PROVIDER`, `SISP_AI_API_KEY`, and `SISP_AI_MODEL` in the hosting secret manager. The provider can be `openai`, `gemini` or `claude`. Configure one at a time with a server-side key and model in Render. Claude uses the Anthropic Messages API; its key is sent only in the `x-api-key` header. Use a model approved by the organization and review current provider terms/privacy settings before sending user questions. For OpenAI, the application sends a server-side Bearer token to the configured Chat Completions endpoint; for Gemini it sends `x-goog-api-key` in the request header. No key is returned to the browser.
 
-AI answers are not enabled just by adding a key: at least one lesson must be reviewed and published, because retrieval is limited to approved, published items. Set model names and any endpoint override intentionally. The local test suite mocks Gemini and does not make provider calls.
+AI answers are not enabled just by adding a key: at least one lesson must be reviewed and published, because retrieval is limited to approved, published items. Set model names and any endpoint override intentionally. The automated checks do not make provider calls. A provider must be configured before Cyizere can answer live questions.
 
 ## Database backup
 

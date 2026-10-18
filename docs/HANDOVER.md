@@ -6,35 +6,35 @@
 - English, Kinyarwanda and French interface/content seed packages.
 - Six age pathways, five lesson drafts in each pathway, five quiz questions attached to each lesson, topic FAQs and guides.
 - Review gating: draft text stays behind the administrator API. Public users can see the curriculum map; full lesson body/quizzes appear after authorized approval and publication.
-- Guest learning path navigation, quiz UI for published items, read-aloud using the browser speech API, and device-only completion progress. Local XP, learning levels, completion badges, and private text certificates award points only for lesson completion.
+- Guest learning path navigation, quiz UI for published items, browser read-aloud, and device-only guest progress. Optional pseudonymous accounts can log in, save lesson completion in Postgres, and delete the account and saved progress. Local XP, badges, and private text certificates remain learning aids only.
 - Official help contacts 112, 3512, 116 and 3029 with source links and a verification date.
 - Search over public approved content plus public service and learning pathway descriptions.
-- Server-side admin sign-in, hashed passwords, expiring hashed sessions, CSRF token checks, rate limits, audit events, content state transition checks and Team CEO/President API enforcement.
-- Admin content editing/review, team profile CRUD for CEO/President, feature-status editing and audit view.
-- Optional server-side OpenAI-compatible/Gemini request code; no API key is sent to the browser. Retrieval is restricted to approved and published lessons.
+- Server-side admin/staff sign-in, hashed passwords, expiring hashed sessions, CSRF token checks, rate limits, audit events, content state transition checks and role enforcement. CEO-only staff application approval confirms each applicant name and role; the CEO can add/remove leadership positions and disable staff accounts.
+- Admin content editing/review, educator lesson-draft creation for professional review, team profile CRUD for CEO/President, feature-status editing, staff approvals, leadership-position management and audit view.
+- Optional server-side OpenAI, Gemini and Claude integrations; the organization selects one provider and stores its API key on the host. No key is sent to the browser. Retrieval is restricted to approved and published lessons.
 - Stateless USSD menu adapter endpoint for short non-sensitive educational/help menu responses; no telecom service code is assigned or connected.
 - GitHub Actions CI, a Gunicorn-based production container, production startup checks, and a live Render deployment connected to Supabase Postgres.
-- Environment example, database setup, administrator guide, backup notes and automated tests.
+- Keyboard-accessible high contrast, scalable text, browser read-aloud and Escape-to-close controls, plus a lazy-loaded OpenStreetMap reference for the University of Rwanda Huye Campus. Environment example, database setup, administrator guide, backup notes and automated tests.
 
 ## Not implemented or not verified; do not represent as operational
 
 - Live pilot deployment at [safespacesafrica.onrender.com](https://safespacesafrica.onrender.com/) with HTTPS and a GitHub-connected Render service. Monitoring, alerting, backup restoration, load testing and independent penetration testing are not verified.
 - Supabase Postgres is used for hosted data; local development uses SQLite. A production backup and retention policy and multi-worker capacity plan still need review.
-- User registration, account recovery, MFA, user privacy export/deletion, consent ledger, saved resources on an account or server-side learning profiles.
+- Email/password recovery, MFA, privacy export, consent ledger, and saved resources. Member accounts use pseudonyms rather than email and can delete their account and saved learning progress.
 - Human support inbox, staffed chat, notifications, voice calls/WebRTC, call queue or safeguarding case management. The public UI says these are unavailable and does not simulate a human response.
 - Contact form submission; donations/payment provider, transaction verification, webhook processing, refunds or receipts.
 - Official external reporting integration; no report is submitted by this site.
 - Telecom gateway, USSD service code, end-to-end provider testing.
 - Verified educational review by local health, legal, safeguarding or curriculum experts. All seed materials are clearly pending review. Emergency numbers are sourced from current official pages but their operational availability still needs pre-launch reconfirmation.
-- Complete WCAG 2.2 AA audit, professional translation review, age/curriculum review, AI safety evaluation across all languages, robust multi-process rate limiting, dependency scanning, incident-response operations and data-retention enforcement.
-- Content history/version comparison/rollback, autosave, admin role-management UI, translation workflow, file/image upload controls, PDF certificate generation, configurable game thresholds, topic challenges, advanced analytics and external notifications.
+- Complete WCAG 2.2 AA audit, professional translation review, age/curriculum review, AI safety evaluation across all languages, robust multi-process rate limiting, dependency scanning, incident-response operations and a formal data-retention schedule.
+- Content history/version comparison/rollback, autosave, file/image upload controls, PDF certificate generation, configurable game thresholds, topic challenges, advanced analytics and external notifications. Educators can enter lesson drafts in the staff workspace; file uploads are not implemented.
 
 ## Required environment variables
 
 - `SISP_ADMIN_EMAIL`, `SISP_ADMIN_PASSWORD`: first-run CEO bootstrap; use a unique password of at least 14 characters.
 - `SISP_HOST`, `SISP_PORT`, `SISP_DB_PATH`: listen address and database path.
 - `SISP_COOKIE_SECURE=true`: set behind HTTPS.
-- `SISP_AI_PROVIDER=openai|gemini`, `SISP_AI_API_KEY`, `SISP_AI_MODEL`: all required to enable the AI request path. Approved published source material is also required. `SISP_AI_BASE_URL` optionally changes the OpenAI-compatible endpoint.
+- `SISP_AI_PROVIDER=openai|gemini|claude`, `SISP_AI_API_KEY`, `SISP_AI_MODEL`: all required to enable the AI request path. Approved published source material is also required. `SISP_AI_BASE_URL` optionally changes the selected provider endpoint. Human chat and voice/calls remain disabled until a monitored, staffed support workflow and calling provider are configured; no case messages are accepted or stored.
 
 Secrets must be supplied by a production secret manager or protected environment configuration. Never commit `.env`.
 

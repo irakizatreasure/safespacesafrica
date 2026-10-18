@@ -11,3 +11,28 @@ body.dark{--ink:#edf5f1;--muted:#b6c9c1;--line:#35554d;background:#102522;color:
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 .faq-item{margin-bottom:.7rem}.faq-question{font-weight:700;cursor:pointer}.track-detail{padding:1.3rem}.support-modes{padding:1.5rem}
 .search-filters{max-width:1000px;align-items:center;flex-wrap:wrap}.search-filters input{min-width:min(100%,280px);flex:2}.filter-select{min-height:46px;border:1px solid #cbd7d0;border-radius:11px;padding:.6rem .65rem;background:#fff;color:var(--ink)}
+
+/* Inclusive controls adapted from the supplied reference. */
+.accessibility-tools{display:flex;align-items:center;justify-content:flex-end;gap:.45rem;padding:.45rem clamp(1rem,5vw,5rem);background:#f6f7f2;border-bottom:1px solid var(--line);font-size:.76rem}
+.accessibility-tools>span:first-child{font-weight:800;color:var(--forest);margin-right:.25rem}
+.accessibility-tools button{min-height:34px;padding:.3rem .65rem;border:1px solid #bdcdc4;border-radius:8px;background:#fff;color:#183d36;font-size:.76rem;font-weight:700;cursor:pointer}
+.accessibility-tools button:hover,.accessibility-tools button[aria-pressed="true"]{background:#173f37;color:#fff}
+.footer-main{grid-template-columns:1.1fr .8fr auto minmax(250px,1.35fr)}
+.footer-map h2{margin:0 0 .25rem;color:#fff;font-size:.9rem}
+.footer-map p{margin:.25rem 0 .55rem;color:#c4d3cd;font-size:.74rem;line-height:1.45}
+.footer-map iframe{display:block;width:100%;height:150px;border:0;border-radius:12px;background:#e4e9e4}
+.footer-map>a{display:inline-block;margin-top:.35rem;color:#c9e1d7;font-size:.8rem;font-weight:700}
+.staff-review-controls{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;justify-content:flex-end}
+.staff-review-controls select{max-width:190px;min-height:38px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);padding:.35rem}
+html.text-large{font-size:112%}html.text-larger{font-size:125%}
+body.high-contrast{--ink:#000;--muted:#202020;--line:#111;background:#fff;color:#000}
+body.high-contrast .site-header,body.high-contrast .card,body.high-contrast .track-card,body.high-contrast .referral-card,body.high-contrast .admin-panel,body.high-contrast .lesson-row,body.high-contrast .search-result,body.high-contrast .assistant-panel{background:#fff!important;color:#000!important;border:2px solid #111!important}
+body.high-contrast .site-header *,body.high-contrast main *,body.high-contrast .footer-main>p{color:#000}
+body.high-contrast .site-footer{background:#000!important;color:#fff!important}
+body.high-contrast .site-footer *,body.high-contrast .site-footer a{color:#fff!important}
+body.high-contrast .button-primary,body.high-contrast .cyizere-launch{background:#000!important;color:#fff!important;border:2px solid #000!important}
+body.high-contrast .button-secondary,body.high-contrast .accessibility-tools button{background:#fff!important;color:#000!important;border:2px solid #000!important}
+body.high-contrast :focus-visible{outline:4px solid #ffbf00!important;outline-offset:3px}
+@media(max-width:900px){.footer-main{grid-template-columns:1fr 1fr}.footer-map{grid-column:1/-1}}
+@media(max-width:600px){.accessibility-tools{justify-content:flex-start;overflow-x:auto;padding:.45rem 1rem}.accessibility-tools>span:first-child{white-space:nowrap}.accessibility-tools button{white-space:nowrap}.footer-main{grid-template-columns:1fr}.footer-map{grid-column:auto}.staff-review-controls{justify-content:flex-start}.staff-review-controls select{max-width:100%}}
+@media(prefers-contrast:more){button,a,input,textarea,select{outline-offset:3px}}

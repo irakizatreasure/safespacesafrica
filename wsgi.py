@@ -26,8 +26,8 @@ def validate_production_environment() -> None:
         raise RuntimeError("Production startup requires a persistent Postgres DATABASE_URL. Do not use ephemeral local storage for production data.")
 
     provider = os.environ.get("SISP_AI_PROVIDER", "").lower()
-    if provider and provider not in {"openai", "gemini"}:
-        raise RuntimeError("SISP_AI_PROVIDER must be openai or gemini when configured.")
+    if provider and provider not in {"openai", "gemini", "claude"}:
+        raise RuntimeError("SISP_AI_PROVIDER must be openai, gemini, or claude when configured.")
     if provider and not all(os.environ.get(key) for key in ("SISP_AI_API_KEY", "SISP_AI_MODEL")):
         raise RuntimeError("Configured AI requires SISP_AI_API_KEY and SISP_AI_MODEL in the host's secret manager.")
 

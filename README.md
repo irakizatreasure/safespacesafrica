@@ -61,7 +61,7 @@ The quizzes are a starter learning aid and use a repeated safety-and-information
 3. An editor can save drafts or submit for review. A subject-matter reviewer can mark an item approved. A CEO or President can publish approved content.
 4. Only CEO and President roles can create, update, reorder, activate or remove public team profiles. This is enforced in the API as well as the interface.
 5. Feature statuses can be changed in **Feature status**. Do not mark a feature live unless its real service and launch checks are complete.
-6. Provision additional roles through `manage_admin.py`; self-service account creation is disabled.
+6. The CEO reviews staff applications in **Staff access**, confirms each name and role, and manages active leadership positions. Educators may create lesson drafts for professional review; assistant and leadership workspaces stay limited until staffed chat/call tools are configured.
 
 Page copy, lesson, FAQ, guide and source-candidate text can be edited in the database-backed content review tool. Content changes are not live until published by an authorized account. The homepage hero/layout and navigation structure are code-defined. The admin workspace does not yet include content version history, rollback, role-management UI or autosave.
 
@@ -71,7 +71,7 @@ Page copy, lesson, FAQ, guide and source-candidate text can be edited in the dat
 - SQLite for local development and Postgres for hosted production, with idempotent startup seeding and server-side API authorization.
 - Static HTML, CSS and JavaScript frontend with responsive navigation and accessible controls.
 - No third-party frontend bundles and no external font dependency.
-- Optional server-side AI adapter for OpenAI-compatible Chat Completions or Google Gemini. It uses only approved, published platform lessons, does not store conversations, and will report unavailable when provider configuration or reviewed knowledge is missing.
+- Optional server-side AI adapter for OpenAI Chat Completions, Google Gemini, or Anthropic Claude Messages. Configure one provider at a time in the host secret manager; no provider key is sent to the browser. It uses only approved, published platform lessons, does not store conversations, and will report unavailable when provider configuration or reviewed knowledge is missing.
 - LocalStorage learning progress remains on the visitor's device and is not sent to the server.
 
 ## Verification
@@ -96,7 +96,7 @@ node --check static/app.js
 - Unsafe admin requests require a matching double-submit CSRF token. Basic per-process rate limits cover login and AI requests.
 - Response headers include a restrictive CSP and anti-framing/nosniff controls. Set `SISP_COOKIE_SECURE=true` behind HTTPS.
 - Use HTTPS, a hardened host, persistent protected database volume, backups and monitoring before any public deployment. The built-in WSGI server is for local evaluation only; the container entry point uses Gunicorn.
-- The application does not accept contact or safeguarding narratives while no monitored staff inbox is configured. The AI endpoint does not persist prompts, but application hosting/network logs may still record request metadata; do not enter identifying details.
+- Public learning remains available without an account. Optional accounts store a pseudonym, password hash and lesson-completion IDs in Postgres; pending staff applications store a name, work email, requested role and a password hash for CEO review. Rejected requests are deleted; approved staff records retain the assigned name and role while password hashes are kept only in staff login accounts. Contact and safeguarding narratives are not accepted while no monitored staff inbox is configured. The AI endpoint does not persist prompts, but application hosting/network logs may still record request metadata; do not enter identifying details.
 - Do not use this application to store safeguarding case notes. A restricted safeguarding subsystem has not been implemented.
 
 ## Official help contacts shown in the app
