@@ -25,11 +25,19 @@ def validate_production_environment() -> None:
     if not (os.environ.get("SISP_DATABASE_URL", "").strip() or os.environ.get("DATABASE_URL", "").strip()):
         raise RuntimeError("Production startup requires a persistent Postgres DATABASE_URL. Do not use ephemeral local storage for production data.")
 
-    provider = os.environ.get("SISP_AI_PROVIDER", "").lower()
-    if provider and provider not in {"openai", "gemini", "claude"}:
+    supported_providers = {"openai", "gemini", "claude"}
+    provider = os.environ.get("SISP_AI_PROVIDER", "").strip().lower()
+    fallback_provider = os.environ.get("SISP_AI_FALLBACK_PROVIDER", "").strip().lower()
+    if provider and provider not in supported_providers:
         raise RuntimeError("SISP_AI_PROVIDER must be openai, gemini, or claude when configured.")
     if provider and not all(os.environ.get(key) for key in ("SISP_AI_API_KEY", "SISP_AI_MODEL")):
         raise RuntimeError("Configured AI requires SISP_AI_API_KEY and SISP_AI_MODEL in the host's secret manager.")
+    if fallback_provider and fallback_provider not in supported_providers:
+        raise RuntimeError("SISP_AI_FALLBACK_PROVIDER must be openai, gemini, or claude when configured.")
+    if fallback_provider and fallback_provider == provider:
+        raise RuntimeError("SISP_AI_FALLBACK_PROVIDER must differ from SISP_AI_PROVIDER.")
+    if fallback_provider and not all(os.environ.get(key) for key in ("SISP_AI_FALLBACK_API_KEY", "SISP_AI_FALLBACK_MODEL")):
+        raise RuntimeError("Configured AI fallback requires SISP_AI_FALLBACK_API_KEY and SISP_AI_FALLBACK_MODEL in the host's secret manager.")
 
 
 validate_production_environment()

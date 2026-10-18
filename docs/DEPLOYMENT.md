@@ -35,11 +35,26 @@ Set `SISP_COOKIE_SECURE=true` only when HTTPS is correctly configured. Bind the 
 
 The production WSGI entry point validates the administrator email/password, HTTPS cookie setting, and any configured AI provider before it starts. It does not print secret values in startup errors.
 
-## Optional AI provider setup
+## Cyizere AI setup
 
-Set all of `SISP_AI_PROVIDER`, `SISP_AI_API_KEY`, and `SISP_AI_MODEL` in the hosting secret manager. The provider can be `openai`, `gemini` or `claude`. Configure one at a time with a server-side key and model in Render. Claude uses the Anthropic Messages API; its key is sent only in the `x-api-key` header. Use a model approved by the organization and review current provider terms/privacy settings before sending user questions. For OpenAI, the application sends a server-side Bearer token to the configured Chat Completions endpoint; for Gemini it sends `x-goog-api-key` in the request header. No key is returned to the browser.
+Cyizere can use OpenAI (GPT) and Google Gemini, with an optional fallback provider. Each request goes to the primary provider first. The fallback is tried only if the primary request fails; the service does not send the same question to both providers when the first succeeds. Claude remains supported for existing deployments.
 
-AI answers are not enabled just by adding a key: at least one lesson must be reviewed and published, because retrieval is limited to approved, published items. Set model names and any endpoint override intentionally. The automated checks do not make provider calls. A provider must be configured before Cyizere can answer live questions.
+In Render, open the `umucyospacehub` web service, choose **Environment**, and add these environment variables. Use API keys created in the provider accounts; do not put them in GitHub, site JavaScript, chat, or this repository.
+
+| Key | Example value | Type |
+| --- | --- | --- |
+| `SISP_AI_PROVIDER` | `openai` | Text |
+| `SISP_AI_API_KEY` | Your OpenAI API key | Secret |
+| `SISP_AI_MODEL` | `gpt-4.1-mini` | Text |
+| `SISP_AI_FALLBACK_PROVIDER` | `gemini` | Text |
+| `SISP_AI_FALLBACK_API_KEY` | Your Gemini API key | Secret |
+| `SISP_AI_FALLBACK_MODEL` | `gemini-2.5-flash` | Text |
+
+The model IDs above are examples. Confirm that each selected model is enabled in its API account before saving. To run with one provider, set the primary three values and leave the fallback variables empty. To prefer Gemini, use `gemini` as the primary and `openai` as the fallback, swapping the corresponding key and model variables. In Render, use **Save, rebuild, and deploy** after adding or changing variables.
+
+OpenAI requests use the official Chat Completions API with server-side Bearer authentication and response storage disabled. Gemini requests use the official `generateContent` API with the API key in a server-side header. The key is never returned to the browser. User messages and the recent conversation are sent to whichever provider is called; the site does not save chat transcripts. Review each provider's current privacy, retention and billing settings before enabling the service.
+
+Cyizere retrieves only language-matched `published` and `approved` lessons, FAQs, guides and page copy. Unreviewed drafts and candidate sources are excluded. The assistant will say when no reviewed site material answers the question. It is an educational tool, not clinical advice, legal advice, counselling, staffed support or emergency response. The app provides a simple availability status without revealing provider or key details. The automated checks do not make live provider calls.
 
 ## Database backup
 

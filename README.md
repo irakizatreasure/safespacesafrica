@@ -2,7 +2,7 @@
 
 A responsive, multilingual web application for the Umucyo Spaces Hub project. It includes a public website, learning-path catalogue, review-gated lesson and quiz content, accessible browser read-aloud, private on-device learning progress, sourced Rwanda help contacts, and a role-protected administrator workspace.
 
-**Current pilot status:** The source is published at [irakizatreasure/safespacesafrica](https://github.com/irakizatreasure/safespacesafrica) and the site is live at [safespacesafrica.onrender.com](https://safespacesafrica.onrender.com/). Render hosts the Python app and Supabase Postgres stores persistent data. Learning drafts still need authorized professional review, and human support, reporting and donations are not operational. See [Feature status and handover](docs/HANDOVER.md).
+**Current pilot status:** The source is published at [irakizatreasure/safespacesafrica](https://github.com/irakizatreasure/safespacesafrica) and the current site is [umucyospacehub.onrender.com](https://umucyospacehub.onrender.com/). Render hosts the Python app and Supabase Postgres stores persistent data. Cyizere supports OpenAI and Gemini with optional failover, but the site still needs provider API keys in Render and approved, published content in each language before it can answer. Human support, reporting and donations are not operational. See [Feature status and handover](docs/HANDOVER.md).
 
 ## Run locally
 
@@ -71,7 +71,7 @@ Page copy, lesson, FAQ, guide and source-candidate text can be edited in the dat
 - SQLite for local development and Postgres for hosted production, with idempotent startup seeding and server-side API authorization.
 - Static HTML, CSS and JavaScript frontend with responsive navigation and accessible controls.
 - No third-party frontend bundles and no external font dependency.
-- Optional server-side AI adapter for OpenAI Chat Completions, Google Gemini, or Anthropic Claude Messages. Configure one provider at a time in the host secret manager; no provider key is sent to the browser. It uses only approved, published platform lessons, does not store conversations, and will report unavailable when provider configuration or reviewed knowledge is missing.
+- Optional server-side Cyizere assistant using OpenAI (GPT) and Google Gemini, with optional provider failover and legacy Claude support. It retrieves only language-matched approved and published site content, returns links to those sources, and does not store transcripts in this application. Add provider credentials in Render and approve/publish site content before enabling user questions; provider privacy, retention and billing terms still apply. See [Cyizere AI setup](docs/DEPLOYMENT.md#cyizere-ai-setup).
 - LocalStorage learning progress remains on the visitor's device and is not sent to the server.
 
 ## Verification
