@@ -1,6 +1,6 @@
-# Implementation and handover status
+# Umucyo Spaces Hub: implementation and handover status
 
-## Implemented in this local MVP
+## Implemented in the live pilot
 
 - Responsive public pages for home, about, team, services, learning, resources, search, help, contact, donations and administrator sign-in.
 - English, Kinyarwanda and French interface/content seed packages.
@@ -13,13 +13,13 @@
 - Admin content editing/review, team profile CRUD for CEO/President, feature-status editing and audit view.
 - Optional server-side OpenAI-compatible/Gemini request code; no API key is sent to the browser. Retrieval is restricted to approved and published lessons.
 - Stateless USSD menu adapter endpoint for short non-sensitive educational/help menu responses; no telecom service code is assigned or connected.
-- GitHub Actions CI, a Gunicorn-based production container, production startup checks, and an unapplied Render Blueprint with a persistent SQLite disk.
+- GitHub Actions CI, a Gunicorn-based production container, production startup checks, and a live Render deployment connected to Supabase Postgres.
 - Environment example, database setup, administrator guide, backup notes and automated tests.
 
 ## Not implemented or not verified; do not represent as operational
 
-- Production deployment to GitHub/Render, HTTPS verification, monitoring, alerting, backup restoration, load testing or independent penetration testing. The GitHub workflow has not run on a remote repository and the Render Blueprint has not been applied.
-- PostgreSQL; the local app and Render pilot blueprint use SQLite. A production PostgreSQL migration and operational policy are still required for scale and multi-worker use.
+- Live pilot deployment at [safespacesafrica.onrender.com](https://safespacesafrica.onrender.com/) with HTTPS and a GitHub-connected Render service. Monitoring, alerting, backup restoration, load testing and independent penetration testing are not verified.
+- Supabase Postgres is used for hosted data; local development uses SQLite. A production backup and retention policy and multi-worker capacity plan still need review.
 - User registration, account recovery, MFA, user privacy export/deletion, consent ledger, saved resources on an account or server-side learning profiles.
 - Human support inbox, staffed chat, notifications, voice calls/WebRTC, call queue or safeguarding case management. The public UI says these are unavailable and does not simulate a human response.
 - Contact form submission; donations/payment provider, transaction verification, webhook processing, refunds or receipts.
@@ -40,7 +40,7 @@ Secrets must be supplied by a production secret manager or protected environment
 
 ## Data backup
 
-Stop the local service or use SQLite's online backup API from a trusted shell before copying the database. Example:
+For local development, stop the service or use SQLite's online backup API from a trusted shell before copying the database. Hosted data lives in Supabase Postgres; use its dashboard/export tools and establish an appropriate backup plan for that project. Example:
 
 ```bash
 python - <<'PY'
@@ -55,6 +55,6 @@ PY
 
 Keep backups encrypted and access-restricted. A successful backup/restore drill has not been performed for a production environment. Restore by stopping the service, preserving the current database, replacing it with the verified backup, then checking `/api/health` and content counts.
 
-## Launch prerequisites
+## Wider-launch prerequisites
 
-Before any public launch, configure real organization contact and support operations, obtain required legal/privacy review, verify emergency/referral availability, review/approve every sensitive translation and lesson, deploy on a supported production stack with HTTPS and PostgreSQL or another reviewed DB, configure monitoring/backups, and run the security, accessibility and safeguarding tests that this local MVP does not cover.
+Before wider public use, configure real organization contact and support operations, obtain required legal/privacy review, verify emergency/referral availability, review/approve every sensitive translation and lesson, review the production stack, database plan and HTTPS configuration, configure monitoring/backups, and run the security, accessibility and safeguarding tests that this local MVP does not cover.
