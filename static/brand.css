@@ -1,4 +1,4 @@
-/* Original visual direction for Safe Informational Spaces.
+/* Original visual direction for Umucyo Spaces Hub.
    Kept separate from the component stylesheet so the identity is easy to tune. */
 :root {
   --forest: #123b36;
@@ -42,8 +42,8 @@ body {
 }
 .brand { gap: .72rem; }
 .brand img { filter: drop-shadow(0 3px 4px rgba(18,59,54,.12)); }
-.brand strong { font-size: .92rem; letter-spacing: -.035em; }
-.brand small { letter-spacing: .24em; }
+.brand strong { font-size: .96rem; font-weight: 800; letter-spacing: -.045em; color: var(--forest); }
+.brand small { letter-spacing: .16em; color: #267a6d; }
 .main-nav a { position: relative; padding-block: .4rem; }
 .main-nav a::after {
   position: absolute;
