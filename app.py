@@ -254,10 +254,10 @@ def init_db(db_path: str | Path, *, bootstrap_admin: bool = True) -> None:
             email = os.environ.get("SISP_ADMIN_EMAIL", "").strip().lower()
             password = os.environ.get("SISP_ADMIN_PASSWORD", "")
             if email and password and len(password) >= 14:
-                existing = conn.execute("SELECT id FROM admins WHERE email=?", (email,)).fetchone()
+                existing = conn.execute("SELECT id,password_hash FROM admins WHERE email=?", (email,)).fetchone()
                 if not existing:
                     conn.execute("INSERT INTO admins(email,password_hash,role,created_at) VALUES(?,?,?,?)", (email, hash_password(password), "CEO", now))
-                elif os.environ.get("SISP_ADMIN_PASSWORD_RESET", "").strip().lower() in {"1", "true", "yes"}:
+                elif not verify_password(password, existing["password_hash"]):
                     conn.execute("UPDATE admins SET password_hash=?, active=1 WHERE id=?", (hash_password(password), existing["id"]))
                     conn.execute("DELETE FROM sessions WHERE admin_id=?", (existing["id"],))
 
