@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.14-slim
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 SISP_DB_PATH=/app/data/sisp.sqlite3
 WORKDIR /app
 COPY . /app
