@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Safe Informational Spaces mark">
-  <rect x="2" y="2" width="60" height="60" rx="20" fill="#123b36"/>
-  <path d="M32 10 49 17v13c0 11-6.8 19.2-17 24C21.8 49.2 15 41 15 30V17l17-7Z" fill="#1e8878" stroke="#f6f4ed" stroke-width="2"/>
-  <path d="M22 31.5 29 38l14-15" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="48" cy="15" r="4" fill="#f0a38b"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Umucyo Spaces Hub mark">
+  <rect x="2" y="2" width="60" height="60" rx="19" fill="#123b36"/>
+  <circle cx="32" cy="21" r="7" fill="#f0a38b"/>
+  <path d="M32 10v-3M20 15l-2-2M44 15l2-2" fill="none" stroke="#f0a38b" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M13 33c7-3 13-2 19 2 6-4 12-5 19-2v17c-7-3-13-2-19 2-6-4-12-5-19-2V33Z" fill="#1e8878" stroke="#f6f4ed" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M32 35v17M19 38c4-1 7-.7 10 1M45 38c-4-1-7-.7-10 1" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
 </svg>
