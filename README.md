@@ -1,8 +1,8 @@
-# Safe Informational Spaces
+# Umucyo Spaces Hub
 
-A responsive, multilingual web application for the Safe Informational Spaces project. It includes a public website, learning-path catalogue, review-gated lesson and quiz content, accessible browser read-aloud, private on-device learning progress, sourced Rwanda help contacts, and a role-protected administrator workspace.
+A responsive, multilingual web application for the Umucyo Spaces Hub project. It includes a public website, learning-path catalogue, review-gated lesson and quiz content, accessible browser read-aloud, private on-device learning progress, sourced Rwanda help contacts, and a role-protected administrator workspace.
 
-**Current handover status:** The source is published at [irakizatreasure/safespacesafrica](https://github.com/irakizatreasure/safespacesafrica). The free hosting configuration uses Render for the Python app and Supabase Postgres for persistent data. It still needs the hosting accounts and production secrets configured before a live deployment can start. The MVP also needs reviewed public content and real support operations before it can be offered as a complete youth service. See [Feature status and handover](docs/HANDOVER.md).
+**Current pilot status:** The source is published at [irakizatreasure/safespacesafrica](https://github.com/irakizatreasure/safespacesafrica) and the site is live at [safespacesafrica.onrender.com](https://safespacesafrica.onrender.com/). Render hosts the Python app and Supabase Postgres stores persistent data. Learning drafts still need authorized professional review, and human support, reporting and donations are not operational. See [Feature status and handover](docs/HANDOVER.md).
 
 ## Run locally
 
@@ -46,7 +46,7 @@ The Compose file binds only to localhost. The container uses Gunicorn; public de
 
 The source is published in [irakizatreasure/safespacesafrica](https://github.com/irakizatreasure/safespacesafrica). GitHub Actions runs Python tests and syntax checks on pushes and pull requests to `main`. Do not commit `.env`, database files, or production secrets.
 
-This is a full-stack Python application. GitHub Pages can serve static files but cannot run this app's Python API, database, admin dashboard, or AI endpoint. The included `render.yaml` is a Render Blueprint for the free Python web service; it deploys from `main` after GitHub checks pass. Set `DATABASE_URL` to the Supabase Postgres **session pooler** connection string in Render, then set a real `SISP_ADMIN_EMAIL` and a unique `SISP_ADMIN_PASSWORD` of at least 14 characters. Those values belong in the host's secret manager, never in GitHub. Local development continues to use SQLite; production refuses to start without Postgres so content and admin changes are not written to an ephemeral web container. This free setup is for an early pilot, not a high-availability service: the web service can sleep and the free database can pause after inactivity. Follow [Deployment and environment configuration](docs/DEPLOYMENT.md).
+This is a full-stack Python application. GitHub Pages can serve static files but cannot run this app's Python API, database, admin dashboard, or AI endpoint. The included `render.yaml` describes the Render Python web service; the connected service deploys from `main` after GitHub checks pass. Set `DATABASE_URL` to the Supabase Postgres **session pooler** connection string in Render, then set a real `SISP_ADMIN_EMAIL` and a unique `SISP_ADMIN_PASSWORD` of at least 14 characters. Those values belong in the host's secret manager, never in GitHub. Local development continues to use SQLite; production refuses to start without Postgres so content and admin changes are not written to an ephemeral web container. This free setup is for an early pilot, not a high-availability service: the web service can sleep and the free database can pause after inactivity. Follow [Deployment and environment configuration](docs/DEPLOYMENT.md).
 
 ## Languages and content
 
